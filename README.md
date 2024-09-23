@@ -31,7 +31,7 @@ npx cypress open
 ```bash
 describe('Login Form', () => {
   it('should fill the login form and submit', () => {
-    cy.visit('http://localhost:8080'); //
+    cy.visit('http://localhost:8080'); // Запуск локального сервера
 
     // Заполнение полей формы
     cy.get('input[name="username"]').type('testuser');

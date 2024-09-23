@@ -10,17 +10,41 @@
 <body>
   <h1>Login</h1>
   <form id="login-form">
-    <input type="text" name="username" placeholder="Username" required />
-    <input type="password" name="password" placeholder="Password" required />
+    <input type="text" name="username" placeholder="Username" />
+    <input type="password" name="password" placeholder="Password" />
     <button type="submit">Login</button>
   </form>
   <p id="message"></p>
+  <p class="error-message" style="color: red;"></p> <!-- Элемент для сообщения об ошибке -->
 
   <script>
     const form = document.getElementById('login-form');
+    const errorMessage = document.querySelector('.error-message');
+
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       const username = form.username.value;
+      const password = form.password.value;
+
+      errorMessage.innerText = ''; // Сброс сообщения об ошибке
+
+      // Проверка на пустые поля
+      if (!username) {
+        errorMessage.innerText = 'Username is required';
+        return;
+      }
+
+      if (!password) {
+        errorMessage.innerText = 'Password is required';
+        return;
+      }
+
+      // Пример проверки корректности
+      if (username !== 'validUser' || password !== 'validPassword') {
+        errorMessage.innerText = 'Invalid username or password';
+        return;
+      }
+
       document.getElementById('message').innerText = `Welcome, ${username}!`;
     });
   </script>
