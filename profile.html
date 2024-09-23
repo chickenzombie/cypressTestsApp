@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Подключение CSS -->
+</head>
+
+<body>
+  <div class="profile-container">
+    <h1>User Profile</h1>
+
+    <img src="avatar.png" alt="User Avatar" id="avatar" onerror="this.style.display='none';" />
+    <input type="file" name="avatar" accept="image/*" onchange="previewAvatar(event)" />
+
+    <form id="profile-form">
+      <input type="text" name="nickname" placeholder="Nickname" required />
+      <select name="gender" required>
+        <option value="" disabled selected>Select your gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="non-binary">Non-binary</option>
+      </select>
+      <input type="date" name="birthdate" placeholder="Date of Birth" required />
+      <button type="submit" class="save-changes">Save changes</button>
+      <button type="button" class="logout" onclick="logout()">Logout</button>
+    </form>
+  </div>
+
+  <script>
+    // Логика выхода из системы
+    function logout() {
+      localStorage.removeItem('username'); // Удаляем имя пользователя из localStorage
+      window.location.href = 'index.html'; // Перенаправляем на страницу логина
+    }
+
+    // Функция предварительного просмотра аватара
+    function previewAvatar(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const avatarImg = document.getElementById('avatar');
+        avatarImg.src = e.target.result;
+        avatarImg.style.display = 'block'; // Показываем аватар после загрузки
+      };
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+</body>
+
+</html>

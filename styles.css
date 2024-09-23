@@ -1,0 +1,115 @@
+/* Общие стили для обеих страниц */
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+h1,
+h2 {
+  text-align: center;
+  /* Центрирование заголовков */
+}
+
+form {
+  margin-bottom: 20px;
+  text-align: center;
+  /* Центрирование содержимого форм */
+}
+
+input,
+select {
+  display: block;
+  margin: 10px auto;
+  /* Центрирование инпутов и селекта */
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  /* Максимальная ширина инпутов и селекта */
+}
+
+button {
+  padding: 12px 20px;
+  /* Увеличение отступов для кнопок */
+  font-size: 16px;
+  /* Увеличение размера шрифта */
+  color: white;
+  /* Цвет текста */
+  border: none;
+  /* Убираем рамку */
+  cursor: pointer;
+  /* Курсор в виде руки при наведении */
+  margin-top: 10px;
+  /* Отступ сверху для кнопок */
+  display: inline-block;
+  /* Делаем кнопки блочными элементами для центрирования */
+  transition: background-color 0.3s ease;
+  /* Плавный переход для фона */
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  /* Зеленый цвет для кнопки Save Changes и Register */
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+  /* Более светлый зеленый при наведении */
+}
+
+button.logout {
+  background-color: red;
+  /* Красный цвет для кнопки Logout */
+}
+
+button.logout:hover {
+  background-color: #e60000;
+  /* Более светлый красный при наведении */
+}
+
+.error-message {
+  color: red;
+  /* Цвет ошибки */
+}
+
+#message,
+#register-message {
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+  /* Центрирование сообщений */
+}
+
+/* Стили для профиля */
+.profile-container {
+  background-color: white;
+  padding: 100px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 600px;
+  /* Ширина контейнера профиля */
+  margin: 0 auto;
+  /* Центрирование контейнера на странице */
+}
+
+.profile-container img {
+  max-width: 150px;
+  /* Максимальная ширина аватара */
+  border-radius: 50%;
+  /* Круглый аватар */
+  display: none;
+  /* Скрываем аватар по умолчанию */
+  margin: 20px auto;
+  /* Центрирование с отступом сверху и снизу */
+}
+
+input[type="file"] {
+  display: block;
+  margin: 10px auto;
+  /* Центрирование инпута загрузки аватара */
+  padding: 10px;
+  width: auto;
+  /* Устанавливаем автоширину для центрирования */
+  max-width: 300px;
+  /* Максимальная ширина инпута загрузки аватара */
+}
