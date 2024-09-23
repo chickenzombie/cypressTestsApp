@@ -4,7 +4,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Form</title>
+  <title>Login and Registration Form</title>
+  <style>
+    /* Простой стиль для разделения секций */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    input {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .error-message {
+      color: red;
+    }
+
+    #message,
+    #register-message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
@@ -15,37 +57,69 @@
     <button type="submit">Login</button>
   </form>
   <p id="message"></p>
-  <p class="error-message" style="color: red;"></p> <!-- Элемент для сообщения об ошибке -->
+
+  <h2>Register</h2>
+  <form id="register-form">
+    <input type="text" name="new-username" placeholder="New Username" />
+    <input type="email" name="email" placeholder="Email" />
+    <input type="password" name="new-password" placeholder="Password" />
+    <input type="password" name="confirm-password" placeholder="Confirm Password" />
+    <button type="submit">Register</button>
+  </form>
+  <p id="register-message"></p>
 
   <script>
-    const form = document.getElementById('login-form');
-    const errorMessage = document.querySelector('.error-message');
-
-    form.addEventListener('submit', (event) => {
+    // Логика логина
+    const loginForm = document.getElementById('login-form');
+    loginForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      const username = form.username.value;
-      const password = form.password.value;
+      const username = loginForm.username.value;
+      const password = loginForm.password.value;
 
-      errorMessage.innerText = ''; // Сброс сообщения об ошибке
+      const message = document.getElementById('message');
+      message.classList.remove('error-message'); // Убираем класс ошибки
 
-      // Проверка на пустые поля
       if (!username) {
-        errorMessage.innerText = 'Username is required';
-        return;
+        message.innerText = 'Username is required'; // Ошибка для пустого имени пользователя
+        message.classList.add('error-message');
+      } else if (!password) {
+        message.innerText = 'Password is required'; // Ошибка для пустого пароля
+        message.classList.add('error-message');
+      } else if (username === 'validUser' && password === 'validPassword') {
+        message.innerText = `Welcome, ${username}!`; // Успешный логин
+        // Очищаем поля ввода после успешного логина
+        loginForm.username.value = '';
+        loginForm.password.value = '';
+      } else {
+        message.innerText = 'Invalid username or password'; // Ошибка для неверных данных
+        message.classList.add('error-message');
       }
+    });
 
-      if (!password) {
-        errorMessage.innerText = 'Password is required';
-        return;
+    // Логика регистрации
+    const registerForm = document.getElementById('register-form');
+    registerForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const newUsername = registerForm['new-username'].value;
+      const email = registerForm['email'].value;
+      const newPassword = registerForm['new-password'].value;
+      const confirmPassword = registerForm['confirm-password'].value;
+
+      const registerMessage = document.getElementById('register-message');
+
+      // Валидация: проверяем совпадение паролей
+      if (newPassword !== confirmPassword) {
+        registerMessage.innerText = 'Passwords do not match';
+        registerMessage.classList.add('error-message');
+      } else if (newPassword.length < 6) {
+        // Проверка на минимальную длину пароля
+        registerMessage.innerText = 'Password must be at least 6 characters long';
+        registerMessage.classList.add('error-message');
+      } else {
+        // Успешная регистрация
+        registerMessage.innerText = `Registration successful! Welcome, ${newUsername}`;
+        registerMessage.classList.remove('error-message');
       }
-
-      // Пример проверки корректности
-      if (username !== 'validUser' || password !== 'validPassword') {
-        errorMessage.innerText = 'Invalid username or password';
-        return;
-      }
-
-      document.getElementById('message').innerText = `Welcome, ${username}!`;
     });
   </script>
 </body>
